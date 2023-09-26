@@ -4,15 +4,14 @@ import ScoreCard from '@/components/ScoreCard'
 
 export default function Home() {
   return (
-   <main className='w-full min-h-full p-10 flex flex-col xl:flex-row gap-5'>
-    <div className='xl:visible xl:w-1/5'>
-      <Leaderboard />
-      </div>
+   <main className='w-full p-5 md:p-10 flex flex-col md:flex-row-reverse gap-5 justify-center items-start'>
+    <div className='md:w-2/3 flex flex-col md:flex-row justify-between gap-5'>
       <Game />
       <ScoreCard />
-      <div className='xl:hidden'>
+    </div>
+    <div className='w-full md:w-1/3'>
       <Leaderboard />
-      </div>
+    </div>
    </main>
   )
 }
