@@ -1,11 +1,11 @@
 import React from 'react'
 
-function ScoreCard() {
+function ScoreCard({currentScore, highScore}) {
   return (
     <div className='flex md:flex-col justify-end md:justify-start items-end gap-12'>
         <div className='flex flex-col items-end'>
         <div className='text-white font-semibold text-4xl md:text-9xl'>
-            369
+            {currentScore? currentScore : 0}
         </div>
         <div className='text-white text-xl md:text-2xl'>
             score
@@ -13,7 +13,7 @@ function ScoreCard() {
         </div>
         <div className='flex flex-col items-end'>
         <div className='text-white font-semibold text-4xl md:text-9xl'>
-            999
+            {highScore? highScore : 0}
         </div>
         <div className='text-white text-xl md:text-2xl'>
             high score
