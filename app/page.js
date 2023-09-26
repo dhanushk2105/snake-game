@@ -1,3 +1,4 @@
+"use client";
 import Game from '@/components/Game'
 import Leaderboard from '@/components/Leaderboard'
 import ScoreCard from '@/components/ScoreCard'

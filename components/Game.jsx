@@ -1,10 +1,28 @@
 "use client";
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import getRandomCoordinates from '@/utils/getRandomCoordinates'
 
-const devicePixelRatio = window.devicePixelRatio || 1
+
 
 function Game() {
   const canvasRef = useRef(null);
+  const [Spacebar, setSpacebar] = useState(false);
+  const [snake, setSnake] = useState([{x: 0, y: 0}])
+  const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === ' ' || event.keyCode === 32) {
+        setSpacebar((prev) => !prev)
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -13,21 +31,42 @@ function Game() {
     canvas.width = canvas.clientWidth * devicePixelRatio;
     canvas.height = canvas.clientHeight * devicePixelRatio;
 
-
-    const centerX = canvas.width / 3;
-    const centerY = canvas.height / 2;
-    const side = 2; // Adjust the radius as needed
-    const lineWidth = 4; // Adjust the line width as needed
-    const strokeColor = 'blue'; // Adjust the stroke color as needed
-
+    const side = 5;
+    const lineWidth = 5;
+    const strokeColor = 'white';
 
     context.beginPath();
-    context.rect(centerX, centerY, side, side)
+    context.rect(10 , 10 , side, side)
     context.lineWidth = lineWidth;
     context.strokeStyle = strokeColor;
     context.stroke();
     context.closePath();
   }, []);
+
+
+
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
+
+    const {x, y} = getRandomCoordinates(canvas.width - 10)
+
+    const side = 5;
+    const lineWidth = 5;
+    const strokeColor = 'blue';
+
+
+    context.beginPath();
+    context.rect(x, y, side, side)
+    context.lineWidth = lineWidth;
+    context.strokeStyle = strokeColor;
+    context.stroke();
+    context.closePath();
+  }, [Spacebar]);
 
   return (
     <canvas ref={canvasRef} className='border-white border border-double w-[70vw] h-[70vw] md:w-[40vw] md:h-[40vw]'>
