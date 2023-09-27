@@ -6,9 +6,9 @@ import ScoreCard from '@/components/ScoreCard'
 export default function Home() {
   return (
    <main className='w-full p-5 md:p-10 flex flex-col md:flex-row-reverse gap-5 justify-center items-start'>
-    <div className='md:w-2/3 flex flex-col md:flex-row justify-between gap-5'>
+    <div className='w-full items-center md:items-start md:w-3/5 flex flex-col md:flex-row justify-between'>
       <Game />
-      <ScoreCard />
+      <ScoreCard currentScore={100} highScore={999} />
     </div>
     <div className='w-full md:w-1/3'>
       <Leaderboard />
