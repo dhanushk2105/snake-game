@@ -5,10 +5,9 @@ import moveSnake from '@/utils/moveSnake';
 
 const SNAKE_SPEED = 5;
 
-function Game({ score, setScore, setHighScore, highScore }) {
+function Game({ score, setScore, setHighScore, highScore, direction, setDirection }) {
   const [snake, setSnake] = useState([{ x: 5, y: 5 }, { x: 5, y: 6 }, { x: 5, y: 7 }])
   const [food, setFood] = useState({ x: 10, y: 10 })
-  const [direction, setDirection] = useState({ x: 1, y: 0 })
   const [gameOverScreen, setGameOverScreen] = useState(false)
 
   function handleKeyDown(e) {
