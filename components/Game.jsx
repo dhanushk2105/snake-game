@@ -31,7 +31,6 @@ function Game({ score, setScore, setHighScore, highScore, direction, setDirectio
 
   function updateGame() {
     if (gameOver()) {
-      stopSnake()
       setGameOverScreen(true)
     } else {
       moveSnake(setSnake, direction)
@@ -73,14 +72,14 @@ function Game({ score, setScore, setHighScore, highScore, direction, setDirectio
     return wallCollision() || selfCollision()
   }
 
-  function stopSnake() {
-    setDirection({ x: 0, y: 0 })
-  }
-
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   })
+
+  useEffect(() => {
+    updateGame()
+  }, [direction])
 
   useEffect(() => {
     let interval = setInterval(updateGame, 1000 / SNAKE_SPEED)
@@ -115,10 +114,10 @@ function Game({ score, setScore, setHighScore, highScore, direction, setDirectio
       </div>}
       {gameOverScreen && <div className='border-red-800 border-2 w-[80vmin] aspect-square flex flex-col items-center justify-center'>
         <div className='text-white text-4xl font-semibold'>Game Over</div>
-        <div className='text-white text-2xl font-semibold'>Press any key to restart</div>
+        <div className='text-white text-2xl font-semibold'>Restart</div>
         <button onClick={resetGame}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="White" class="w-16 h-16">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="White" className="w-16 h-16">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
           </svg>
         </button>
 
